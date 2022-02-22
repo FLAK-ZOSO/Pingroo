@@ -126,17 +126,15 @@ void processMove(Game &game_, std::string move) {
 
 
 void updateMatrix(Game &game_) {
-    for (int i = 0; i < 50; i++) {
-        if (game_.matrix[3][i] == game_.skin)
-            game_.matrix[3][i] == ' ';
+    for (int j = 0; j < 50; j++)
+        game_.matrix[3][j] == ' ';
+    for (int j = 0; j < 50; j++) {
+        for (int i = 0; i < 20; i++)
+            game_.matrix[i][j] = ' ';
     }
-    for (int i = 0; i < 50; i++) {
-        for (int j = 0; j < 20; j++) {
-            if (game_.matrix[j][i] == 'O') {
-                game_.matrix[j][i] = ' ';
-                return;
-            }
-        }
+    for (int i = 0; i < 20; i++) {
+        game_.matrix[i][0] = '#';
+        game_.matrix[i][49] = '#';
     }
     game_.matrix[3][game_.x] = game_.skin;
     game_.matrix[game_.ball.y][game_.ball.x] = 'O';
@@ -155,6 +153,7 @@ void printMatrix(char m[20][50]) {
 	}
 	for (int i = 0; i < 50; i++)
 		std::cout << '#';
+    std::cout << std::endl;
     // std::cout << std::endl << "Points: " << game_.points << std::endl;
 }
 

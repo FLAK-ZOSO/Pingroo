@@ -12,11 +12,9 @@ std::string inputMove() {
 
 Game game(std::string name) { // Ritorna l'oggetto Game
     Game myGame;
-    Ball myBall;
-    myBall.direction = 1;
-    myBall.x = 24;
-    myBall.y = 15;
-    myGame.ball = myBall;
+    myGame.ball.direction = 1;
+    myGame.ball.x = 24;
+    myGame.ball.y = 15;
     myGame.points = 0;
     srand(time(0));
 
@@ -54,7 +52,7 @@ Game game(std::string name) { // Ritorna l'oggetto Game
 	    auto input = std::async(std::launch::async, inputMove);
 	    
         // Continue execution in main thread.
-        while (input.wait_for(0.2s) != std::future_status::ready) {
+        while (input.wait_for(0.1s) != std::future_status::ready) {
             // Controlliamo se ha perso
             if (check(myGame)) { // The user lost
                 end = true;

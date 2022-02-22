@@ -20,28 +20,27 @@ struct Game {
 
 void wallTouched(Game &game_, unsigned wall) {
     // 0=paddle, 1=top, 2=left, 3=bottom, 4=right
-    switch (wall) {
-        case 0:
-            if (game_.ball.direction == 1)
-                game_.ball.direction = 2;
-            else if (game_.ball.direction == 4)
-                game_.ball.direction = 3;
-        // case 1:  The ball touched the upper wall, the user lost
-        case 2:
-            if (game_.ball.direction == 3)
-                game_.ball.direction = 2;
-            else
-                game_.ball.direction = 3;
-        case 3:
-            if (game_.ball.direction == 3)
-                game_.ball.direction = 1;
-            else
-                game_.ball.direction = 4;
-        case 4:
-            if (game_.ball.direction == 1)
-                game_.ball.direction = 4;
-            else
-                game_.ball.direction = 1;
+    // case 1:  The ball touched the upper wall, the user lost
+    if (wall == 0) {
+        if (game_.ball.direction == 1)
+            game_.ball.direction = 2;
+        else if (game_.ball.direction == 4)
+            game_.ball.direction = 3;
+    } else if (wall == 2) {
+        if (game_.ball.direction == 3)
+            game_.ball.direction = 2;
+        else if (game_.ball.direction == 4)
+            game_.ball.direction = 1;
+    } else if (wall == 3) {
+        if (game_.ball.direction == 3)
+            game_.ball.direction = 4;
+        else if (game_.ball.direction == 2)
+            game_.ball.direction = 1;
+    } else if (wall == 4) {
+        if (game_.ball.direction == 1)
+            game_.ball.direction = 4;
+        else if (game_.ball.direction == 2)
+            game_.ball.direction = 3;
     }
 }
 

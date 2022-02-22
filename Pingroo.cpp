@@ -10,7 +10,7 @@ std::string inputMove() {
 }
 
 
-Game game(std::string name) { // Ritorna l'oggetto Game
+Game game() { // Ritorna l'oggetto Game
     Game myGame;
     myGame.ball.direction = 2;
     myGame.ball.x = 24;
@@ -79,14 +79,11 @@ Game game(std::string name) { // Ritorna l'oggetto Game
 
 
 int main() {
-    while (true) {
-        Game game_ = game("Persona");
+    do {
+        Game game_ = game();
         system("cls");
         std::cout << "Points: " << game_.points << std::endl;
         std::cout << std::endl << std::endl;
-
-        // Chiediamo se vuole rigiocare
-        if (!newGame()) break;
-    }
+    } while (newGame());
     return 0;
 }

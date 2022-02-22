@@ -38,7 +38,6 @@ Game game(std::string name) { // Ritorna l'oggetto Game
     }
 
     // Start
-    myGame.name = "Player";
     myGame.skin = '-';
     myGame.x = 24;
     myGame.matrix[3][24] = myGame.skin;
@@ -67,6 +66,8 @@ Game game(std::string name) { // Ritorna l'oggetto Game
 
             // Aggiorniamo l'immagine
             printMatrix(myGame.matrix);
+
+            myGame.points++;
         }
         processMove(myGame, input.get());
         if (end) break;

@@ -11,8 +11,7 @@ struct Ball {
 struct Game {
     char matrix[20][50]; // Il campo di gioco
     int points; // Punteggio del giocatore
-    std::string name; // Nome del giocatore
-    char skin; // Iniziale del giocatore, da usare come pedina
+    char skin; // Pedina
     int x; // Posizione in orizzontale della pedina
     Ball ball; // Palla in questione
 };

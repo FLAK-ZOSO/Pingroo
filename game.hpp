@@ -47,59 +47,50 @@ void wallTouched(Game &game_, unsigned wall) {
 
 
 void moveBall(Game &game_) {
-    switch (game_.ball.direction) {
-        case 1:
-            if (game_.ball.y == 0) {
-                wallTouched(game_, 1);
-                return;
-            } else if (game_.ball.x == 48) {
-                wallTouched(game_, 4);
-                return;
-            } else if (game_.ball.y == 4) {
-                if (game_.ball.x == game_.x)
-                    wallTouched(game_, 0);
-                    return;
-            } else {
-                game_.ball.x++;
-                game_.ball.y--;
-            }
-        case 2:
-            if (game_.ball.y == 19) {
-                wallTouched(game_, 3);
-                return;
-            } else if (game_.ball.x == 48) {
-                wallTouched(game_, 4);
-                return;
-            } else {
-                game_.ball.x++;
-                game_.ball.y++;
-            }
-        case 3:
-            if (game_.ball.y == 19) {
-                wallTouched(game_, 3);
-                return;
-            } else if (game_.ball.x == 1) {
-                wallTouched(game_, 2);
-                return;
-            } else {
-                game_.ball.x--;
-                game_.ball.y++;
-            }
-        case 4:
-            if (game_.ball.y == 0) {
-                wallTouched(game_, 1);
-                return;
-            } else if (game_.ball.x == 1) {
-                wallTouched(game_, 2);
-                return;
-            } else if (game_.ball.y == 4) {
-                if (game_.ball.x == game_.x)
-                    wallTouched(game_, 0);
-                    return;
-            } else {
-                game_.ball.x--;
-                game_.ball.y--;
-            }
+    if (game_.ball.direction == 1) {
+        game_.ball.x++;
+        game_.ball.y--;
+        if (game_.ball.y == 0) {
+            wallTouched(game_, 1);
+        } else if (game_.ball.x == 48) {
+            wallTouched(game_, 4);
+            return;
+        } else if (game_.ball.y == 4) {
+            if (game_.ball.x == game_.x)
+                wallTouched(game_, 0);
+        }
+    } else if (game_.ball.direction == 2) {
+        game_.ball.x++;
+        game_.ball.y++;
+        if (game_.ball.y == 19) {
+            wallTouched(game_, 3);
+            return;
+        } else if (game_.ball.x == 48) {
+            wallTouched(game_, 4);
+            return;
+        }
+    } else if (game_.ball.direction == 3) {
+        game_.ball.x--;
+        game_.ball.y++;
+        if (game_.ball.y == 19) {
+            wallTouched(game_, 3);
+            return;
+        } else if (game_.ball.x == 1) {
+            wallTouched(game_, 2);
+            return;
+        }
+    } else if (game_.ball.direction == 4) {
+        game_.ball.x--;
+        game_.ball.y--;
+        if (game_.ball.y == 0) {
+            wallTouched(game_, 1);
+        } else if (game_.ball.x == 1) {
+            wallTouched(game_, 2);
+            return;
+        } else if (game_.ball.y == 4) {
+            if (game_.ball.x == game_.x)
+                wallTouched(game_, 0);
+        }
     }
 }
 

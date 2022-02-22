@@ -24,7 +24,7 @@ void wallTouched(Game &game_, unsigned wall) {
         case 0:
             if (game_.ball.direction == 1)
                 game_.ball.direction = 2;
-            else
+            else if (game_.ball.direction == 4)
                 game_.ball.direction = 3;
         // case 1:  The ball touched the upper wall, the user lost
         case 2:
@@ -55,8 +55,9 @@ void moveBall(Game &game_) {
         } else if (game_.ball.x == 48) {
             wallTouched(game_, 4);
             return;
-        } else if (game_.ball.y == 4) {
-            if (game_.ball.x == game_.x)
+        }
+        if (game_.ball.y == 3) {
+            if (game_.ball.x == game_.x || game_.matrix[game_.ball.y][game_.ball.x] == '-')
                 wallTouched(game_, 0);
         }
     } else if (game_.ball.direction == 2) {
@@ -87,8 +88,9 @@ void moveBall(Game &game_) {
         } else if (game_.ball.x == 1) {
             wallTouched(game_, 2);
             return;
-        } else if (game_.ball.y == 4) {
-            if (game_.ball.x == game_.x)
+        }
+        if (game_.ball.y == 3) {
+            if (game_.ball.x == game_.x || game_.matrix[game_.ball.y][game_.ball.x] == '-')
                 wallTouched(game_, 0);
         }
     }
@@ -123,11 +125,13 @@ void updateMatrix(Game &game_) {
         for (int i = 0; i < 20; i++)
             game_.matrix[i][j] = ' ';
     }
+    game_.matrix[3][game_.x-1] = game_.skin;
+    game_.matrix[3][game_.x] = game_.skin;
+    game_.matrix[3][game_.x+1] = game_.skin;
     for (int i = 0; i < 20; i++) {
         game_.matrix[i][0] = '#';
         game_.matrix[i][49] = '#';
     }
-    game_.matrix[3][game_.x] = game_.skin;
     game_.matrix[game_.ball.y][game_.ball.x] = 'O';
 }
 

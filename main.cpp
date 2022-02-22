@@ -37,9 +37,9 @@ Game game(std::string name) { // Ritorna l'oggetto Game
         myGame.matrix[i][49] = '#';
     }
 
-    // Il personaggio del giocatore sarà la lettera maiuscola della sua iniziale
+    // Start
     myGame.name = "Player";
-    myGame.skin = name[0];
+    myGame.skin = '-';
     myGame.x = 24;
     myGame.matrix[3][24] = myGame.skin;
     myGame.matrix[myGame.ball.y][myGame.ball.x] = 'O';

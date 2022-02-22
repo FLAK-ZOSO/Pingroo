@@ -13,23 +13,12 @@ std::string inputMove() {
 Game game(std::string name) { // Ritorna l'oggetto Game
     Game myGame;
     Ball myBall;
-    myBall.direction = rand() % 4;
+    myBall.direction = 1;
     myBall.x = 24;
     myBall.y = 15;
     myGame.ball = myBall;
     myGame.points = 0;
     srand(time(0));
-
-    // Informazioni
-    long double frame_duration_;
-    while ((std::cout << "Duration of a frame: ") && (!(std::cin >> frame_duration_))) {
-        std::cout << "Not a positive number" << std::endl;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-    if (frame_duration_ < 0.05)
-        frame_duration_ = 0.05;
-    auto frame_duration = std::chrono::duration<long double> (frame_duration_);
 
     // Colore
     std::string color;
@@ -76,7 +65,7 @@ Game game(std::string name) { // Ritorna l'oggetto Game
             moveBall(myGame);
 
             // Aggiorniamo la matrice
-            // updateMatrix(myGame);
+            updateMatrix(myGame);
 
             // Aggiorniamo l'immagine
             printMatrix(myGame.matrix);

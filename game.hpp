@@ -82,7 +82,7 @@ void moveBall(Game &game_) {
                 wallTouched(game_, 2);
                 return;
             } else {
-                game_.ball.x++;
+                game_.ball.x--;
                 game_.ball.y++;
             }
         case 4:
@@ -155,6 +155,7 @@ void printMatrix(char m[20][50]) {
 	}
 	for (int i = 0; i < 50; i++)
 		std::cout << '#';
+    // std::cout << std::endl << "Points: " << game_.points << std::endl;
 }
 
 

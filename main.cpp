@@ -1,0 +1,104 @@
+#include <future>
+#include <thread>
+#include <limits>
+#include "game.hpp"
+
+
+std::string inputMove() {
+	std::string move;
+	if (std::cin >> move) return move;
+}
+
+
+Game game(std::string name) { // Ritorna l'oggetto Game
+    Game myGame;
+    Ball myBall;
+    myBall.direction = rand() % 4;
+    myBall.x = 24;
+    myBall.y = 15;
+    myGame.ball = myBall;
+    myGame.points = 0;
+    srand(time(0));
+
+    // Informazioni
+    long double frame_duration_;
+    while ((std::cout << "Duration of a frame: ") && (!(std::cin >> frame_duration_))) {
+        std::cout << "Not a positive number" << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+    if (frame_duration_ < 0.05)
+        frame_duration_ = 0.05;
+    auto frame_duration = std::chrono::duration<long double> (frame_duration_);
+
+    // Colore
+    std::string color;
+    std::cout << "Color: ";
+    std::cin >> color;
+    if (color == "matrix")
+        system("color 0A");
+    if (color == "red")
+        system("color 0C");
+    if (color == "fucsia")
+        system("color DE");
+
+    // Riempio la matrice, che in partenza è vuota
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 50; j++)
+            myGame.matrix[i][j] = ' ';
+        myGame.matrix[i][0] = '#';
+        myGame.matrix[i][49] = '#';
+    }
+
+    // Il personaggio del giocatore sarà la lettera maiuscola della sua iniziale
+    myGame.name = "Player";
+    myGame.skin = name[0];
+    myGame.x = 24;
+    myGame.matrix[3][24] = myGame.skin;
+    myGame.matrix[myGame.ball.y][myGame.ball.x] = 'O';
+
+    bool end = false;
+    while (true) {
+        // Enable standard literals as 2s and ""s.
+        using namespace std::literals;
+    	// Eseguo la funzione inputMove in modo asincrono
+	    auto input = std::async(std::launch::async, inputMove);
+	    
+        // Continue execution in main thread.
+        while (input.wait_for(0.2s) != std::future_status::ready) {
+            // Controlliamo se ha perso
+            if (check(myGame)) { // The user lost
+                end = true;
+                break;
+            }
+            
+            // Muoviamo la pallina
+            moveBall(myGame);
+
+            // Aggiorniamo la matrice
+            // updateMatrix(myGame);
+
+            // Aggiorniamo l'immagine
+            printMatrix(myGame.matrix);
+        }
+        processMove(myGame, input.get());
+        if (end) break;
+    }
+    // updateMatrix(myGame);
+    printMatrix(myGame.matrix);
+	return myGame;
+}
+
+
+int main() {
+    while (true) {
+        Game game_ = game("Persona");
+        system("cls");
+        std::cout << "Points: " << game_.points << std::endl;
+        std::cout << std::endl << std::endl;
+
+        // Chiediamo se vuole rigiocare
+        if (!newGame()) break;
+    }
+    return 0;
+}

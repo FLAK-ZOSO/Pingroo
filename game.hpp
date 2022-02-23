@@ -97,9 +97,7 @@ void moveBall(Game &game_) {
 
 
 bool check(Game &game_) {
-    if (game_.ball.y == 0)
-        return true;
-    return false;
+    return game_.ball.y == 0;
 }
 
 

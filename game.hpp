@@ -123,9 +123,8 @@ void updateMatrix(Game &game_) {
         for (int i = 0; i < 20; i++)
             game_.matrix[i][j] = ' ';
     }
-    game_.matrix[3][game_.x-1] = game_.skin;
-    game_.matrix[3][game_.x] = game_.skin;
-    game_.matrix[3][game_.x+1] = game_.skin;
+    for (int i = -2; i < 3; i++)
+        game_.matrix[3][game_.x-i] = game_.skin;
     for (int i = 0; i < 20; i++) {
         game_.matrix[i][0] = '#';
         game_.matrix[i][49] = '#';
@@ -147,7 +146,6 @@ void printMatrix(char m[20][50]) {
 	for (int i = 0; i < 50; i++)
 		std::cout << '#';
     std::cout << std::endl;
-    // std::cout << std::endl << "Points: " << game_.points << std::endl;
 }
 
 

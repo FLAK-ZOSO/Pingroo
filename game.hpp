@@ -6,6 +6,7 @@
 struct Ball {
     int x;
     int y;
+    char skin;
     unsigned direction; // 1=NE, 2=SE, 3=SO, 4=NO
 };
 struct Game {
@@ -55,7 +56,7 @@ void moveBall(Game &game_) {
             return;
         }
         if (game_.ball.y == 3) {
-            if (game_.ball.x == game_.x || game_.matrix[3][game_.ball.x] == '-')
+            if (game_.ball.x == game_.x || game_.matrix[3][game_.ball.x] == game_.skin)
                 wallTouched(game_, 0);
         }
     } else if (game_.ball.direction == 2) {
@@ -88,7 +89,7 @@ void moveBall(Game &game_) {
             return;
         }
         if (game_.ball.y == 3) {
-            if (game_.ball.x == game_.x || game_.matrix[3][game_.ball.x] == '-')
+            if (game_.ball.x == game_.x || game_.matrix[3][game_.ball.x] == game_.skin)
                 wallTouched(game_, 0);
         }
     }
@@ -129,7 +130,7 @@ void updateMatrix(Game &game_) {
         game_.matrix[i][0] = '#';
         game_.matrix[i][49] = '#';
     }
-    game_.matrix[game_.ball.y][game_.ball.x] = 'O';
+    game_.matrix[game_.ball.y][game_.ball.x] = game_.ball.skin;
 }
 
 

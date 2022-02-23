@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <algorithm> // std::count
 #include "time.h"
 
 
@@ -101,9 +102,18 @@ bool check(Game &game_) {
 
 
 void processMove(Game &game_, std::string move) {
-	if (move == "d" or move == "D")
+    size_t n = std::count(move.begin(), move.end(), 'd');
+    int right = static_cast<int>(n);
+    n = std::count(move.begin(), move.end(), 'D');
+    right += static_cast<int>(n);
+    n = std::count(move.begin(), move.end(), 's');
+    int left = static_cast<int>(n);
+    n = std::count(move.begin(), move.end(), 'S');
+    left += static_cast<int>(n);
+
+    for (int i = 0; i < right; i++)
         game_.x++;
-    if (move == "s" or move == "S")
+    for (int i = 0; i < left; i++)
         game_.x--;
     
     // Effetto pacman

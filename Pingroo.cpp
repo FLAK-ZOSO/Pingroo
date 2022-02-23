@@ -72,7 +72,7 @@ Game game() { // Ritorna l'oggetto Game
         processMove(myGame, input.get());
         if (end) break;
     }
-    // updateMatrix(myGame);
+    updateMatrix(myGame);
     printMatrix(myGame.matrix);
 	return myGame;
 }

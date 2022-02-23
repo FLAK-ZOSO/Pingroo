@@ -55,7 +55,7 @@ void moveBall(Game &game_) {
             return;
         }
         if (game_.ball.y == 3) {
-            if (game_.ball.x == game_.x || game_.matrix[game_.ball.y][game_.ball.x] == '-')
+            if (game_.ball.x == game_.x || game_.matrix[3][game_.ball.x] == '-')
                 wallTouched(game_, 0);
         }
     } else if (game_.ball.direction == 2) {
@@ -88,7 +88,7 @@ void moveBall(Game &game_) {
             return;
         }
         if (game_.ball.y == 3) {
-            if (game_.ball.x == game_.x || game_.matrix[game_.ball.y][game_.ball.x] == '-')
+            if (game_.ball.x == game_.x || game_.matrix[3][game_.ball.x] == '-')
                 wallTouched(game_, 0);
         }
     }
